@@ -3,6 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 
 const categories = require("../data/categories.json");
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     categories.forEach((category) => {
