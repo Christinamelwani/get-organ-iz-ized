@@ -5,7 +5,7 @@ const journalRouter = require("./journal");
 
 const router = express.Router();
 router.use("/categories", categoryRouter);
-router.use("/event", eventRouter);
+router.use("/events", eventRouter);
 router.use("/journal", journalRouter);
 
 module.exports = router;
