@@ -1,6 +1,7 @@
 const { Event, RecurringType, EventInstance } = require("../models");
 const { validateEvent } = require("../helpers/ValidateEvent");
 const { GenerateInstances } = require("../helpers/GenerateInstances");
+const { scheduleEvent } = require("../helpers/ScheduleEvent");
 
 class EventController {
   static async getEvents(req, res, next) {
@@ -23,19 +24,22 @@ class EventController {
       // TODO: add support for duration
 
       const validatedInput = validateEvent(req.body);
-      const newEvent = await Event.create(validatedInput);
+      const { duration } = req.body;
+      const { startTime, endTime } = scheduleEvent(duration);
 
-      const { isRecurring } = req.body;
-      let recurringType = null;
+      // const newEvent = await Event.create(validatedInput);
 
-      if (isRecurring) {
-        recurringType = await RecurringType.findByPk(req.body.RecurringId);
-      }
+      // const { isRecurring } = req.body;
+      // let recurringType = null;
 
-      const instances = GenerateInstances(isRecurring, recurringType, newEvent);
-      const eventInstances = await EventInstance.bulkCreate(instances);
+      // if (isRecurring) {
+      //   recurringType = await RecurringType.findByPk(req.body.RecurringId);
+      // }
 
-      res.status(201).json(eventInstances);
+      // const instances = GenerateInstances(isRecurring, recurringType, newEvent);
+      // const eventInstances = await EventInstance.bulkCreate(instances);
+
+      // res.status(201).json(eventInstances);
     } catch (err) {
       next(err);
     }
