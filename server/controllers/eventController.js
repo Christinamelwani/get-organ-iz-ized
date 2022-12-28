@@ -21,25 +21,22 @@ class EventController {
 
   static async addEvent(req, res, next) {
     try {
-      // TODO: add support for duration
+      const newEventInput = await validateEvent(req.body);
+      const newEvent = await Event.create(newEventInput);
 
-      const validatedInput = validateEvent(req.body);
-      const { duration } = req.body;
-      const { startTime, endTime } = scheduleEvent(duration);
+      let recurringType = null;
+      if (newEvent.isRecurring) {
+        recurringType = await RecurringType.findByPk(req.body.RecurringId);
+      }
 
-      // const newEvent = await Event.create(validatedInput);
+      const instances = GenerateInstances(
+        newEvent.isRecurring,
+        recurringType,
+        newEvent
+      );
+      const eventInstances = await EventInstance.bulkCreate(instances);
 
-      // const { isRecurring } = req.body;
-      // let recurringType = null;
-
-      // if (isRecurring) {
-      //   recurringType = await RecurringType.findByPk(req.body.RecurringId);
-      // }
-
-      // const instances = GenerateInstances(isRecurring, recurringType, newEvent);
-      // const eventInstances = await EventInstance.bulkCreate(instances);
-
-      // res.status(201).json(eventInstances);
+      res.status(201).json(eventInstances);
     } catch (err) {
       next(err);
     }

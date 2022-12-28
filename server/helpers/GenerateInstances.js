@@ -1,7 +1,7 @@
 function GenerateInstances(isRecurring, recurringType, newEvent) {
   let day = new Date();
   let repetitions = 30;
-  let interval = Number(recurringType.interval);
+  let interval = Number(recurringType?.interval) || 0;
   const instances = [];
 
   if (!isRecurring) {

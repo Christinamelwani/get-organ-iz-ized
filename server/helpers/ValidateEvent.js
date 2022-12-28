@@ -1,10 +1,25 @@
-function validateEvent(event) {
+const { scheduleEvent } = require("./ScheduleEvent");
+
+async function validateEvent(event) {
+  let { title, CategoryId, startTime, endTime, duration, isRecurring } = event;
+
+  if (!startTime) {
+    ({ startTime, endTime } = await scheduleEvent(event));
+  }
+
+  if (!startTime) {
+    throw {
+      name: "No available slots! Choose another day to do this!",
+    };
+  }
+
   return {
-    title: event.title,
-    CategoryId: event.CategoryId,
-    startTime: event.startTime,
-    endTime: event.endTime,
-    isRecurring: event.isRecurring,
+    title,
+    CategoryId,
+    startTime,
+    duration,
+    endTime,
+    isRecurring,
   };
 }
 
