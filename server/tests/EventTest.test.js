@@ -57,26 +57,39 @@ describe("Post a second one-time event", () => {
     const response = await request(app).post("/events").send(data);
     expect(response.statusCode).toBe(201);
   });
+});
 
-  describe("Post a one-time event that doesn't fit", () => {
-    const data = {
-      title: "study again again",
-      CategoryId: 1,
-      duration: "08:00:00",
-      isRecurring: false,
-    };
-    test("Should create a one-time event", async () => {
-      const response = await request(app).post("/events").send(data);
-      expect(response.statusCode).toBe(201);
-    });
+describe("Post a one-time event that doesn't fit", () => {
+  const data = {
+    title: "study again again",
+    CategoryId: 1,
+    duration: "08:00:00",
+    isRecurring: false,
+  };
+  test("Should reject", async () => {
+    const response = await request(app).post("/events").send(data);
+    expect(response.statusCode).toBe(400);
   });
+});
 
-  test("Should get all of today's events", async () => {
-    const response = await request(app).get("/events").query({
-      date: "12-28-2022",
-    });
-    expect(response.statusCode).toBe(200);
+describe("Post a one-time event that fits", () => {
+  const data = {
+    title: "study for the last time",
+    CategoryId: 1,
+    duration: "01:00:00",
+    isRecurring: false,
+  };
+  test("Should accept", async () => {
+    const response = await request(app).post("/events").send(data);
+    expect(response.statusCode).toBe(201);
   });
+});
+
+test("Should get all of today's events", async () => {
+  const response = await request(app).get("/events").query({
+    date: "12-28-2022",
+  });
+  expect(response.statusCode).toBe(200);
 });
 
 afterAll(async () => {
