@@ -13,8 +13,27 @@ module.exports = (sequelize, DataTypes) => {
   }
   JournalEntry.init(
     {
-      date: DataTypes.DATEONLY,
-      contents: DataTypes.STRING,
+      date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Please provide a date",
+          },
+        },
+      },
+      contents: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Please provide content",
+          },
+          notNull: {
+            msg: "Please provide content",
+          },
+        },
+      },
     },
     {
       sequelize,
