@@ -1,4 +1,4 @@
-function toTimeString(time) {
+function toLocaleTimeString(time) {
   return time.toLocaleTimeString("en-us", {
     hour: "2-digit",
     minute: "2-digit",
@@ -7,4 +7,4 @@ function toTimeString(time) {
   });
 }
 
-module.exports = { toTimeString };
+module.exports = { toLocaleTimeString };

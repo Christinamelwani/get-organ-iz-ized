@@ -1,5 +1,6 @@
 const { scheduleEvent } = require("./ScheduleEvent");
 const { stringToDuration } = require("./scheduling/StringToDuration");
+const { calculateDuration } = require("./validation/CalculateDuration");
 const { propertiesToTypes } = require("./validation/propertiesToTypes");
 
 async function validateEvent(event) {
@@ -32,6 +33,10 @@ async function validateEvent(event) {
       message: errors.join("\n"),
       status: 400,
     };
+  }
+
+  if (event.startTime && event.endTime) {
+    event.duration = calculateDuration(event.startTime, event.endTime);
   }
 
   if (event.duration && !event.startTime) {

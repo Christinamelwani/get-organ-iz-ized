@@ -1,4 +1,4 @@
-const { parseTime } = require("./ParseTime");
+const { parseTime } = require("../ParseTime");
 
 function findFreeIntervals(eventInstances) {
   let freeIntervals = [];

@@ -4,7 +4,7 @@ const { getEventInstances } = require("./GetEventInstances");
 
 const { findFreeIntervals } = require("./scheduling/FindFreeIntervals");
 const { timeSlotFits } = require("./scheduling/TimeSlotFits");
-const { toTimeString } = require("./scheduling/ToTimeString");
+const { toLocaleTimeString } = require("./ToLocaleTimeString");
 
 async function scheduleEvent(eventDuration) {
   let startTime = "";
@@ -20,8 +20,8 @@ async function scheduleEvent(eventDuration) {
     });
 
     if (timeSlotFits(freeIntervalDuration, eventDuration)) {
-      startTime = toTimeString(freeInterval.startTime);
-      endTime = toTimeString(add(freeInterval.startTime, eventDuration));
+      startTime = toLocaleTimeString(freeInterval.startTime);
+      endTime = toLocaleTimeString(add(freeInterval.startTime, eventDuration));
     }
   }
 
