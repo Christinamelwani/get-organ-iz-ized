@@ -1,0 +1,14 @@
+[
+  {
+    "name": "daily",
+    "interval": 86400000
+  },
+  {
+    "name": "weekly",
+    "interval": 604800000
+  },
+  {
+    "name": "monthly",
+    "interval": 2629746000
+  }
+]

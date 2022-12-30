@@ -18,7 +18,8 @@ database-drop:
 database-reset:
 	cd server && npx sequelize-cli db:drop && npx sequelize-cli db:drop --env test &&\
 	npx sequelize-cli db:create && npx sequelize-cli db:create --env test &&\
-	npx sequelize-cli db:migrate && npx sequelize-cli db:migrate --env test
+	npx sequelize-cli db:migrate && npx sequelize-cli db:migrate --env test &&\
+	npx sequelize-cli db:seed:all
 backend-run:
 	cd server && nodemon bin/www.js
 backend-test:
