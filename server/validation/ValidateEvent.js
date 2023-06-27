@@ -1,5 +1,5 @@
 const { scheduleEvent } = require("../helpers/scheduling/ScheduleEvent");
-const { stringToDuration } = require("../helpers/scheduling/StringToDuration");
+const { stringToDuration } = require("../conversion/StringToDuration");
 const { calculateDuration } = require("./CalculateDuration");
 const { propertiesToTypes } = require("./propertiesToTypes");
 
