@@ -1,5 +1,5 @@
-const { parseTime } = require("../ParseTime");
-const { toTimeString } = require("../ToTImeString");
+const { parseTime } = require("./conversion/ParseTime");
+const { toTimeString } = require("./conversion/ToTimeString");
 
 function calculateDuration(startTime, endTime) {
   startTime = parseTime(startTime);

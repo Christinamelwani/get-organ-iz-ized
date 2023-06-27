@@ -1,12 +1,22 @@
-const { scheduleEvent } = require("./ScheduleEvent");
-const { stringToDuration } = require("./scheduling/StringToDuration");
-const { calculateDuration } = require("./validation/CalculateDuration");
+const { scheduleEvent } = require("./scheduling/ScheduleEvent");
+const { stringToDuration } = require("./conversion/StringToDuration");
+const { calculateDuration } = require("./CalculateDuration");
 const { propertiesToTypes } = require("./validation/propertiesToTypes");
 
 async function validateEvent(event) {
   const errors = [];
+
   const requiredProperties = ["title", "CategoryId"];
-  event = propertiesToTypes(event);
+
+  event = {
+    title: event.title,
+    CategoryId: Number(event.CategoryId),
+    startTime: event.startTime,
+    endTime: event.endTime,
+    duration: event.duration,
+    isRecurring: Boolean(event.isRecurring),
+    ReccuringId: Number(event.CategoryId),
+  };
 
   for (const property of requiredProperties) {
     if (!event[property]) {

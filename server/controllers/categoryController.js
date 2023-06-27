@@ -13,6 +13,7 @@ class CategoryController {
   static async createCategory(req, res, next) {
     try {
       const { name, color } = req.body;
+
       const newCategory = Category.create({ name, color });
 
       res.status(201).json({ status: 201, data: newCategory });

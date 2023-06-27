@@ -1,4 +1,4 @@
-const { Event, EventInstance } = require("../models");
+const { Event, EventInstance } = require("../../models");
 
 async function getEventInstances(date) {
   if (!date) {
