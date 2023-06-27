@@ -1,10 +1,10 @@
 const { add, intervalToDuration } = require("date-fns");
 
-const { getEventInstances } = require("./GetEventInstances");
+const { getEventInstances } = require("../GetEventInstances");
 
-const { findFreeIntervals } = require("./scheduling/FindFreeIntervals");
-const { timeSlotFits } = require("./scheduling/TimeSlotFits");
-const { toLocaleTimeString } = require("./ToLocaleTimeString");
+const { findFreeIntervals } = require("./FindFreeIntervals");
+const { timeSlotFits } = require("./TimeSlotFits");
+const { toLocaleTimeString } = require("../../conversion/ToLocaleTimeString");
 
 async function scheduleEvent(eventDuration) {
   let startTime = "";

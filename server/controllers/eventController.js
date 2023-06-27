@@ -1,5 +1,5 @@
 const { Event, RecurringType, EventInstance } = require("../models");
-const { validateEvent } = require("../helpers/ValidateEvent");
+const { validateEvent } = require("../validation/ValidateEvent");
 const { GenerateInstances } = require("../helpers/GenerateInstances");
 const { getEventInstances } = require("../helpers/GetEventInstances");
 
@@ -15,8 +15,8 @@ class EventController {
 
   static async addEvent(req, res, next) {
     try {
-      const newEventInput = await validateEvent(req.body);
-      const newEvent = await Event.create(newEventInput);
+      let newEvent = await validateEvent(req.body);
+      newEvent = await Event.create(newEvent);
 
       let recurringType = null;
       if (newEvent.isRecurring) {
@@ -28,6 +28,7 @@ class EventController {
         recurringType,
         newEvent
       );
+
       const eventInstances = await EventInstance.bulkCreate(instances);
 
       res.status(201).json(eventInstances);

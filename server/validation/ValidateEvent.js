@@ -1,7 +1,7 @@
-const { scheduleEvent } = require("./ScheduleEvent");
-const { stringToDuration } = require("./scheduling/StringToDuration");
-const { calculateDuration } = require("./validation/CalculateDuration");
-const { propertiesToTypes } = require("./validation/propertiesToTypes");
+const { scheduleEvent } = require("../helpers/scheduling/ScheduleEvent");
+const { stringToDuration } = require("../helpers/scheduling/StringToDuration");
+const { calculateDuration } = require("./CalculateDuration");
+const { propertiesToTypes } = require("./propertiesToTypes");
 
 async function validateEvent(event) {
   const errors = [];
